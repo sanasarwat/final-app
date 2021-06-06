@@ -19,6 +19,7 @@ import { Container, Grid } from "@material-ui/core/";
 //import TopHeader from "../../components/top-header/top-header";
 import Footer from "../../Components/Footer/Footer";
 import BreadCrums from "../../Components/Breadcrums/Breadcrums";
+import BottomHeader from "../../Components/Header/BottomHeader";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -154,6 +155,7 @@ export default function Collections(props) {
           </Grid>
         </Grid>
       </Container>
+      <BottomHeader />
       <Footer />
     </>
   );

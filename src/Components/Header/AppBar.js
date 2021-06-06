@@ -177,8 +177,20 @@ export default function NavBar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMobileMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMobileMenuClose}>My account</MenuItem>
+      <MenuItem
+        onClick={() => {
+          history.push("/profile");
+        }}
+      >
+        Profile
+      </MenuItem>
+      <MenuItem
+        onClick={() => {
+          history.push("/user-dashboard");
+        }}
+      >
+        My account
+      </MenuItem>
       <MenuItem onClick={handleMobileMenuClose}>Logout</MenuItem>
     </Menu>
   );
@@ -194,8 +206,27 @@ export default function NavBar(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem
+        onClick={() => {
+          history.push("/profile");
+        }}
+      >
+        Profile
+      </MenuItem>
+      <MenuItem
+        onClick={() => {
+          history.push("/user-dashboard");
+        }}
+      >
+        My Account
+      </MenuItem>
+      <MenuItem
+        onClick={() => {
+          history.push("/wish-list");
+        }}
+      >
+        WishList
+      </MenuItem>
       <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
     </Menu>
   );
@@ -211,9 +242,34 @@ export default function NavBar(props) {
       open={isIconMenuOpen}
       onClose={handleIconClose}
     >
-      <MenuItem onClick={handleMenuClose}>Home</MenuItem>
-      <MenuItem onClick={handleMenuClose}>About</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Contact Us</MenuItem>
+      <MenuItem
+        onClick={() => {
+          history.push("/");
+        }}
+      >
+        Home
+      </MenuItem>
+      <MenuItem
+        onClick={() => {
+          history.push("/about");
+        }}
+      >
+        About
+      </MenuItem>
+      <MenuItem
+        onClick={() => {
+          history.push("/contact-us");
+        }}
+      >
+        Contact Us
+      </MenuItem>
+      <MenuItem
+        onClick={() => {
+          history.push("/collection");
+        }}
+      >
+        Products
+      </MenuItem>
     </Menu>
   );
 
@@ -236,7 +292,15 @@ export default function NavBar(props) {
                   <MenuIcon />
                 </IconButton>
               </div>
-              <Typography className={classes.title} variant="h6" noWrap>
+              <Typography
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  history.push("/");
+                }}
+                className={classes.title}
+                variant="h6"
+                noWrap
+              >
                 All Categories
               </Typography>
               <div className={classes.button}>

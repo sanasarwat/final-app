@@ -5,13 +5,17 @@ import { Grid, Typography, Chip, Box, Container } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "flex-start",
     flexWrap: "wrap",
     listStyle: "none",
     padding: theme.spacing(0),
     margin: "0",
+    [theme.breakpoints.up("xs")]: {
+      display: "none",
+    },
   },
+
   chip: {
     margin: theme.spacing(0.75),
     color: theme.palette.primary.main,

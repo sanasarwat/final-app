@@ -43,6 +43,7 @@ function AppRoute() {
             <Route exact path="/checkout">
               <Checkout />
             </Route>
+
             <Route path="/wish-list">
               <WishList />
             </Route>

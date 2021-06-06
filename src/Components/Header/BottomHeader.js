@@ -7,6 +7,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import PersonIcon from "@material-ui/icons/Person";
 import HelpIcon from "@material-ui/icons/Help";
 import BottomCartDrawer from "../../Pages/Cart/BottomCartDrawer";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +22,7 @@ export default function BottomHeader() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const { totalCartItems } = useContext(CartContext);
+  let history = useHistory();
 
   return (
     <BottomNavigation
@@ -33,8 +35,24 @@ export default function BottomHeader() {
     >
       <BottomNavigationAction indicatorColor="secondary" icon={<HelpIcon />} />
       <BottomNavigationAction icon={<BottomCartDrawer />} />
-      <BottomNavigationAction icon={<FavoriteIcon />} />
-      <BottomNavigationAction icon={<PersonIcon />} />
+      <BottomNavigationAction
+        icon={
+          <FavoriteIcon
+            onClick={() => {
+              history.push("wish-list");
+            }}
+          />
+        }
+      />
+      <BottomNavigationAction
+        icon={
+          <PersonIcon
+            onClick={() => {
+              history.push("profile");
+            }}
+          />
+        }
+      />
     </BottomNavigation>
   );
 }

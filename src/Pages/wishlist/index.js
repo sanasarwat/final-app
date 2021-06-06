@@ -8,6 +8,7 @@ import WishListning from "./wish-list";
 import { Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ProfileHeaderList from "../../Components/profile/profile-header-mobile";
+import BottomHeader from "../../Components/Header/BottomHeader";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +30,7 @@ export default function WishList() {
         <ProfileHeaderList />
         <WishListning />
       </Container>
-
+      <BottomHeader />
       <Footer />
     </>
   );

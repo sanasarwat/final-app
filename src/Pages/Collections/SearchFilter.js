@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: "45ch",
-      [theme.breakpoints.up("sm")]: {
+      width: "55ch",
+      [theme.breakpoints.up("xs")]: {
         width: "30ch",
       },
     },
@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    top: 30,
   },
 }));
 
@@ -43,9 +44,9 @@ export function SearchBar(props) {
           <form className={classes.root} noValidate autoComplete="off">
             <Grid container>
               <Grid item md={10}>
-                <div className={classes.searchIcon}>
+                {/* <div className={classes.searchIcon}>
                   <SearchIcon />
-                </div>
+                </div> */}
                 <Box>
                   <TextField
                     id="outlined-name-input"

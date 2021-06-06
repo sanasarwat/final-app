@@ -14,12 +14,22 @@ import {
   FormControlLabel,
   FormGroup,
   Checkbox,
-  Container,
 } from "@material-ui/core";
 import FavoriteBorderSharpIcon from "@material-ui/icons/FavoriteBorderSharp";
 import FavoriteSharpIcon from "@material-ui/icons/FavoriteSharp";
 
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  imageStyle: {
+    [theme.breakpoints.up("xs")]: {
+      width: "180px",
+    },
+  },
+}));
+
 export default function ProductDetail() {
+  const classes = useStyles();
   let { id } = useParams();
   let product = getProductById(id);
   const [qty, setQty] = useState(1);
@@ -44,15 +54,19 @@ export default function ProductDetail() {
 
   return (
     <>
-      <Paper component={Box} py={6} px={5} m={6} boxShadow={4}>
+      <Paper component={Box} py={6} px={4} m={2} boxShadow={4}>
         <Grid container>
-          <Grid item md={7} xs={12}>
+          <Grid item md={7} xs={12} sm={12} lg={7}>
             <Box display="flex" alignItems="center" justifyContent="center">
-              <img src={product.image} alt="detail" />
+              <img
+                src={product.image}
+                alt="detail"
+                className={classes.imageStyle}
+              />
             </Box>
           </Grid>
 
-          <Grid item md={5} xs={12}>
+          <Grid item md={5} xs={12} sm={12} lg={5}>
             <Box>
               <Box display="flex" justifyContent="flex-end" alignItems="center">
                 <FormGroup>
@@ -76,10 +90,10 @@ export default function ProductDetail() {
                 </Typography>
               </Box>
               <Box mb={1}>
-                <Typography variant="h3">{product.title}</Typography>
+                <Typography variant="h4">{product.title}</Typography>
               </Box>
               <Box mb={1}>
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle1">
                   {product.units} Pc(s).
                 </Typography>
               </Box>
@@ -107,7 +121,12 @@ export default function ProductDetail() {
                   {product.description}
                 </Typography>
               </Box>
-              <Box display="flex" justifyContent="flex-end" p={2}>
+              <Box
+                display="flex"
+                justifyContent="flex-end"
+                p={2}
+                alignItems="center"
+              >
                 <Button
                   variant="contained"
                   color="primary"
@@ -115,16 +134,14 @@ export default function ProductDetail() {
                 >
                   Add to Cart
                 </Button>
-
-                {!!unitsInCart(product) && (
-                  <Box>
-                    <Typography>
-                      There are {unitsInCart(product)} units of this item in
-                      cart!
-                    </Typography>
-                  </Box>
-                )}
               </Box>
+              {!!unitsInCart(product) && (
+                <Box mt={2}>
+                  <Typography variant="subtitle2">
+                    There are {unitsInCart(product)} units of this item in cart!
+                  </Typography>
+                </Box>
+              )}
             </Box>
           </Grid>
         </Grid>

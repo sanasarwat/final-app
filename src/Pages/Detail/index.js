@@ -4,6 +4,8 @@ import ProductDetail from "./ProductDetail";
 import NavBar from "../../Components/Header/AppBar";
 import BreadCrums from "../../Components/Breadcrums/Breadcrums";
 import { makeStyles, Container } from "@material-ui/core";
+import BottomHeader from "../../Components/Header/BottomHeader";
+import Footer from "../../Components/Footer/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +25,8 @@ export default function Detail() {
       <Container className={classes.root}>
         <ProductDetail />
       </Container>
+      <BottomHeader />
+      <Footer />
     </>
   );
 }

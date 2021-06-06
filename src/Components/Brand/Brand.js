@@ -4,7 +4,7 @@ import { CardActionArea, CardMedia, Card, Container } from "@material-ui/core/";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 280,
+    maxWidth: 380,
     marginBottom: "8px",
   },
   media: {

@@ -6,33 +6,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// function SampleNextArrow({ className, style, onClick }) {
-//   return (
-//     <div
-//       className={className}
-//       style={{
-//         ...style,
-//         display: "block",
-//         background: "grey",
-//       }}
-//       onClick={onClick}
-//     />
-//   );
-// }
-
-// function SamplePrevArrow({ className, style, onClick }) {
-//   return (
-//     <div
-//       className={className}
-//       style={{
-//         ...style,
-//         display: "block",
-//         background: "grey",
-//       }}
-//       onClick={onClick}
-//     />
-//   );
-// }
 export default function BrandListing() {
   var settings = {
     dots: true,

@@ -8,6 +8,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import TocIcon from "@material-ui/icons/Toc";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,37 +25,55 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProfileHeaderList() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
-
+  let history = useHistory();
   return (
     <List
       component="nav"
       aria-labelledby="nested-list-subheader"
       className={classes.root}
     >
-      <ListItem button>
+      <ListItem
+        button
+        onClick={() => {
+          history.push("/user-dashboard");
+        }}
+      >
         <ListItemIcon>
           <TocIcon color="primary" />
         </ListItemIcon>
         <ListItemText primary="Your Orders" />
       </ListItem>
-      <ListItem button>
+
+      <ListItem
+        button
+        onClick={() => {
+          history.push("/track-order");
+        }}
+      >
         <ListItemIcon>
           <LocalShippingIcon color="primary" />
         </ListItemIcon>
         <ListItemText primary="Track Orders" />
       </ListItem>
-      <ListItem button onClick={handleClick}>
+
+      <ListItem
+        button
+        onClick={() => {
+          history.push("/profile");
+        }}
+      >
         <ListItemIcon>
           <PersonOutlineIcon color="primary" />
         </ListItemIcon>
         <ListItemText primary="Your Profile" />
       </ListItem>
-      <ListItem button onClick={handleClick}>
+
+      <ListItem
+        button
+        onClick={() => {
+          history.push("/wish-list");
+        }}
+      >
         <ListItemIcon>
           <FavoriteBorderIcon color="primary" />
         </ListItemIcon>

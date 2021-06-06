@@ -11,6 +11,7 @@ import AddressBar from "../../Components/profile/address-book-bar";
 import AddressList from "./address";
 import AddAdrress from "./add-address";
 import ProfileHeaderList from "../../Components/profile/profile-header-mobile";
+import BottomHeader from "../../Components/Header/BottomHeader";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,6 +35,7 @@ export default function Profile() {
         <AddressBar />
         <AddressList />
       </Container>
+      <BottomHeader />
       <Footer />
     </div>
   );

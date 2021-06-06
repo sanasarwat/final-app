@@ -26,7 +26,7 @@ export default function RelatedProducts() {
     infinite: false,
     speed: 500,
     slidesToShow: 5,
-    slidesToScroll: 4,
+    slidesToScroll: 2,
     initialSlide: 0,
     responsive: [
       {
@@ -58,7 +58,7 @@ export default function RelatedProducts() {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
@@ -72,7 +72,7 @@ export default function RelatedProducts() {
           <Slider {...settings}>
             {products.map((product) => (
               <div key={product.id}>
-                <Card style={{ margin: "20px 0px 20px 4px", width: "200px" }}>
+                <Card style={{ margin: "20px 0px 20px 4px", width: "170px" }}>
                   <CardActionArea>
                     <CardContent>
                       <img

@@ -6,6 +6,7 @@ import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   paperStyle: {
+    maxWidth: 380,
     "&:hover": {
       boxShadow: theme.shadows[5],
       borderColor: theme.palette.secondary.main,
@@ -17,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "black",
     padding: "16px 16px",
-    fontSize: "20px",
   },
 }));
 
@@ -52,7 +52,7 @@ export default function Menu(props) {
               </Button> */}
               {/* <Button>{category}</Button> */}
 
-              <Typography className={classes.Link} variant="h6">
+              <Typography className={classes.Link} variant="subtitle2">
                 {category.title}
               </Typography>
             </Link>
