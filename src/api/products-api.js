@@ -56,6 +56,7 @@ export const getVisibleProducts = (
 
 export const getVisibleProductsByMenu = (selectedMenu) => {
   return products.filter((product) => {
+    //console.log(selectedMenu);
     //menu filter
     let menuMatch = true;
     if (selectedMenu && product.category)

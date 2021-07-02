@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { createContext } from "react";
+import { UseQuery } from "../Hooks";
 
 export const FilterContext = createContext();
 
 export default function FilterProvider(props) {
+  const [selectedMenu, setSelectedMenu] = useState("");
+
   const [selectedSearchItem, setSelecetdSearchItem] = useState("");
   const [selectedCategory, setselectedCategory] = useState([]);
 
   const [selectedBrand, setSelectedBrand] = useState([]);
   const [selectedRating, setSelectedRating] = useState("");
-
-  const [selectedMenu, setSelectedMenu] = useState("");
 
   //search handler
   function searchHandler(e) {

@@ -4,6 +4,7 @@ import { CartContext } from "../../helpers/CartProvider";
 import { WishContext } from "../../helpers/WishProvider";
 import DetailTabs from "./Tabs";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import {
   Grid,
   Typography,

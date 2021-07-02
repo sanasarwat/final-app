@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../helpers/CartProvider";
+
 import {
   Card,
   CardActions,
@@ -97,13 +99,19 @@ const useStyles = makeStyles((theme) => ({
 
 export function ProductCard(props) {
   const [wish, setWish] = useState(false);
-
+  const [qty, setQty] = useState(1);
+  const { addToCart, unitsInCart } = useContext(CartContext);
+  const handleAddToCart = () => {
+    addToCart(props.product, qty);
+    setQty(1);
+  };
   const handleWish = (e) => {
     setWish(e.target.checked);
     console.log(e.target.checked);
   };
 
   const { id, image, title, description, price, units, rating } = props.product;
+
   const classes = useStyles();
   const countReviews = rating;
 
@@ -172,6 +180,7 @@ export function ProductCard(props) {
             </Box>
             <Box>
               <Button
+                onClick={handleAddToCart}
                 className={classes.cartBtn}
                 startIcon={<ShoppingCartIcon />}
               >

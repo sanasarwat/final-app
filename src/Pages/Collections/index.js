@@ -13,14 +13,15 @@ import PriceFilter from "./PriceFilter";
 import ReviewFilter from "./ReviewFilter";
 import ItemFoundText from "./ItemFoundText";
 import { FilterContext } from "../../helpers/FilterProvider";
+
 import NavBar from "../../Components/Header/AppBar";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, Grid } from "@material-ui/core/";
+import { Container, Grid, Typography } from "@material-ui/core/";
 //import TopHeader from "../../components/top-header/top-header";
 import Footer from "../../Components/Footer/Footer";
 import BreadCrums from "../../Components/Breadcrums/Breadcrums";
 import BottomHeader from "../../Components/Header/BottomHeader";
-
+import { UseQuery } from "../../Hooks";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
@@ -30,8 +31,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Collections(props) {
+export default function Collections() {
   const classes = useStyles();
+  //let query = UseQuery();
+  //let cName = query.get("category") || "";
 
   const {
     selectedBrand,
@@ -45,6 +48,7 @@ export default function Collections(props) {
     searchHandler,
     selectedSearchItem,
   } = useContext(FilterContext);
+  // console.log(selectedMenu);
 
   const [selectedPriceRange, setSelectedPriceRange] = useState({
     min: priceRange.min,
@@ -138,7 +142,6 @@ export default function Collections(props) {
                 <ItemFoundText total={products.length} string="Search String" />
               </Grid>
             </Grid>
-
             <Grid item md={12}>
               <ChipFilter
                 selectedCategory={selectedCategory}
@@ -149,6 +152,7 @@ export default function Collections(props) {
                 setSelectedRating={setSelectedRating}
               />
             </Grid>
+
             <Grid item md={12}>
               <ProductListing products={products} />
             </Grid>

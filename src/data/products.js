@@ -8,7 +8,7 @@ export const products = [
     description:
       "Enjoy the crispy chiken fillet in a soft bun with spicy mayo and our signature sauce",
     price: 195,
-    category: "Fresh Friuts",
+    category: "BreakFast",
     brand: "ABC",
     units: 1,
     rating: 1,

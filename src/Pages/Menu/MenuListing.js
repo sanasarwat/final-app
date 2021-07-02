@@ -18,10 +18,8 @@ import "slick-carousel/slick/slick-theme.css";
 //   },
 // }));
 
-export default function MenuListing(props) {
+export default function MenuListing() {
   // const classes = useStyle();
-  const { setSelectedMenu } = props;
-  //console.log(setSelectedMenu);
 
   var settings = {
     dots: false,
@@ -85,7 +83,7 @@ export default function MenuListing(props) {
         <Slider {...settings}>
           {category.map((category) => (
             <Box item key={category.id}>
-              <Menu category={category} setSelectedMenu={setSelectedMenu} />
+              <Menu category={category} />
             </Box>
           ))}
         </Slider>

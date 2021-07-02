@@ -5,18 +5,18 @@ import "react-toastify/dist/ReactToastify.css";
 import CartProvider from "./helpers/CartProvider";
 import FilterProvider from "./helpers/FilterProvider";
 import WishProvider from "./helpers/WishProvider";
-//import WishProvider from "./helpers/WishProvider";
 
 function App() {
   return (
     <>
       <ToastContainer transition={Slide} position="bottom-right" />
+
       <WishProvider>
-        <CartProvider>
-          <FilterProvider>
+        <FilterProvider>
+          <CartProvider>
             <AppRoute />
-          </FilterProvider>
-        </CartProvider>
+          </CartProvider>
+        </FilterProvider>
       </WishProvider>
     </>
   );
