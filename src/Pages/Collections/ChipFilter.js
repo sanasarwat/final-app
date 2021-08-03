@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0),
     margin: "0",
     [theme.breakpoints.up("xs")]: {
-      display: "none",
+      display: "flex",
     },
   },
 
@@ -28,16 +28,19 @@ const useStyles = makeStyles((theme) => ({
 export function ChipFilter(props) {
   const classes = useStyles();
   const {
-    selectedCategory,
-    setselectedCategory,
-    selectedPriceRange,
+    selectedCategories,
+    setSelectedCategories,
     setSelectedPriceRange,
     selectedRating,
     setSelectedRating,
+    selectedPriceRange,
+    selectedBrand,
+    setSelectedBrand,
   } = props;
 
   if (
-    selectedCategory.length +
+    selectedCategories.length +
+      (selectedBrand ? 1 : 0) +
       (selectedPriceRange.isApplied ? 1 : 0) +
       (selectedRating ? 1 : 0) ===
     0
@@ -45,9 +48,10 @@ export function ChipFilter(props) {
     return null;
 
   const onClearAll = () => {
-    setselectedCategory([]);
+    setSelectedCategories([]);
     setSelectedPriceRange({ min: "", max: "", isApplied: false });
     setSelectedRating("");
+    setSelectedBrand("");
   };
 
   return (
@@ -60,8 +64,8 @@ export function ChipFilter(props) {
                 <Typography variant="subtitle1">Filter By:</Typography>
               </Box>
               <Box component="ul" className={classes.root}>
-                {!!selectedCategory.length &&
-                  selectedCategory.map((category) => {
+                {!!selectedCategories.length &&
+                  selectedCategories.map((category) => {
                     let icon;
                     return (
                       <li key={category.key}>
@@ -69,8 +73,10 @@ export function ChipFilter(props) {
                           icon={icon}
                           label={category}
                           onDelete={() =>
-                            setselectedCategory(
-                              selectedCategory.filter((cat) => cat !== category)
+                            setSelectedCategories(
+                              selectedCategories.filter(
+                                (cat) => cat !== category
+                              )
                             )
                           }
                           className={classes.chip}
@@ -78,6 +84,17 @@ export function ChipFilter(props) {
                       </li>
                     );
                   })}
+              </Box>
+              <Box component="ul" className={classes.root}>
+                {selectedBrand && (
+                  <li>
+                    <Chip
+                      label={selectedBrand}
+                      onDelete={() => setSelectedBrand("")}
+                      className={classes.chip}
+                    />
+                  </li>
+                )}
               </Box>
               <Box component="ul" className={classes.root}>
                 {selectedPriceRange.isApplied && (

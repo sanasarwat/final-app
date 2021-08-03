@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Slider, Typography, Paper, Box } from "@material-ui/core/";
+import { priceRange } from "../../data/products";
 
 const useStyles = makeStyles({
   root: {
@@ -10,7 +11,24 @@ const useStyles = makeStyles({
 });
 
 export default function PriceFilter(props) {
-  const { min, max, selectedPriceRange, onChangePrice } = props;
+  const { selectedPriceRange, setSelectedPriceRange } = props;
+  const onChangePrice = (newPriceRange) => {
+    if (
+      newPriceRange[0] === priceRange.min &&
+      newPriceRange[1] === priceRange.max
+    )
+      setSelectedPriceRange({
+        min: newPriceRange[0],
+        max: newPriceRange[1],
+        isApplied: false,
+      });
+    else
+      setSelectedPriceRange({
+        min: newPriceRange[0],
+        max: newPriceRange[1],
+        isApplied: true,
+      });
+  };
   const classes = useStyles();
 
   return (
@@ -21,10 +39,13 @@ export default function PriceFilter(props) {
             Filter By Price
           </Typography>
           <Slider
-            value={[selectedPriceRange.min, selectedPriceRange.max]}
-            min={min}
-            max={max}
-            step={(max - min) / 8}
+            value={[
+              selectedPriceRange.min || priceRange.min,
+              selectedPriceRange.max || priceRange.max,
+            ]}
+            min={priceRange.min}
+            max={priceRange.max}
+            step={(priceRange.max - priceRange.min) / 8}
             onChange={(event, newPriceRange) => onChangePrice(newPriceRange)}
             onChangeCommitted={(event, newPriceRange) =>
               onChangePrice(newPriceRange)

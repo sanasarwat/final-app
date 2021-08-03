@@ -36,9 +36,7 @@ function CategoryFilterItem(props) {
               checked: classes.checked,
             }}
             checked={isChecked}
-            onChange={(event) =>
-              onChangeCategory(category, event.target.checked)
-            }
+            onChange={(e) => onChangeCategory(category, e.target.checked)}
           />
         }
         label={category}
@@ -49,7 +47,15 @@ function CategoryFilterItem(props) {
 }
 
 export function CategoryFilter(props) {
-  let { selectedCategory, onChangeCategory } = props;
+  let { selectedCategories, setSelectedCategories } = props;
+
+  const onChangeCategory = (category, isChecked) => {
+    if (isChecked) setSelectedCategories([...selectedCategories, category]);
+    else
+      setSelectedCategories(
+        selectedCategories.filter((cat) => cat !== category)
+      );
+  };
   return (
     <>
       <Accordion square elevation={1}>
@@ -70,7 +76,7 @@ export function CategoryFilter(props) {
               <CategoryFilterItem
                 key={category}
                 category={category}
-                isChecked={selectedCategory.includes(category)}
+                isChecked={selectedCategories.includes(category)}
                 onChangeCategory={onChangeCategory}
               />
             ))}

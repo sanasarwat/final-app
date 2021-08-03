@@ -1,73 +1,55 @@
 import React from "react";
-import { brandTitle } from "../../data/brand";
-import { makeStyles } from "@material-ui/core/styles";
+import MenuItem from "@material-ui/core/MenuItem";
 import {
-  Box,
+  FormControl,
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
+  Box,
   Typography,
-} from "@material-ui/core";
+} from "@material-ui/core/";
+import Select from "@material-ui/core/Select";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-function BrandFilterItem(props) {
-  const { brand, isChecked, onChangeBrand } = props;
+const sortOptions = [
+  { value: "UniLiver", title: "UniLiver" },
+  { value: "LU", title: "LU" },
+  { value: "ABC", title: "ABC" },
+];
+export default function BrandFilter(props) {
+  const { selectedBrand, setSelectedBrand } = props;
+  //console.log(selectedBrand);
   return (
-    <FormGroup>
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={isChecked}
-            onChange={(event) => onChangeBrand((brand, event.target.checked))}
-          />
-        }
-        label={brand}
-      />
-    </FormGroup>
-  );
-}
-
-const useStyles = makeStyles({
-  root: {
-    marginTop: "10px",
-  },
-});
-
-export function BrandFilter(props) {
-  let { selectedBrand, onChangeBrand } = props;
-  const classes = useStyles();
-  return (
-    <>
-      <div className={classes.root}>
-        <Accordion square elevation={1}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                Filter By Brand Name
-              </Typography>
-            </Box>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Box>
-              {brandTitle.map((brand) => (
-                <BrandFilterItem
-                  key={brand}
-                  brand={brand}
-                  isChecked={selectedBrand.includes(brand)}
-                  onChangeBrand={onChangeBrand}
-                />
+    <div>
+      <Accordion square elevation={1}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Box>
+            <Typography variant="h6" gutterBottom>
+              Brands Filter
+            </Typography>
+          </Box>
+        </AccordionSummary>
+        <AccordionDetails>
+          <FormControl>
+            {/* <InputLabel id="sort-prods">Brand By: </InputLabel> */}
+            <Select
+              labelId="sort-prods"
+              value={selectedBrand || "UniLiver"}
+              onChange={(e) => setSelectedBrand(e.target.value)}
+            >
+              {sortOptions.map((item) => (
+                <MenuItem key={item.value} value={item.value}>
+                  {item.title}
+                </MenuItem>
               ))}
-            </Box>
-          </AccordionDetails>
-        </Accordion>
-      </div>
-    </>
+            </Select>
+          </FormControl>
+        </AccordionDetails>
+      </Accordion>
+    </div>
   );
 }

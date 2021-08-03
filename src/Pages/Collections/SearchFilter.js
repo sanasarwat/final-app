@@ -33,7 +33,11 @@ const useStyles = makeStyles((theme) => ({
 
 export function SearchBar(props) {
   const classes = useStyles();
-  const { searchHandler, placeholder } = props;
+  const { setSearchItem, placeholder } = props;
+
+  function searchHandler(e) {
+    setSearchItem(e.target.value);
+  }
   return (
     <>
       <Paper component={Box} p={3} my={2}>

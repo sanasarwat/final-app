@@ -17,8 +17,14 @@ const useStyles = makeStyles({
 
 export function FilterBar(props) {
   const classes = useStyles();
-  const { setselectedCategory, setSelectedPriceRange, setSelectedRating } =
-    props;
+  const {
+    setSelectedCategories,
+    setSelectedBrand,
+    setSelectedRating,
+    setSelectedMenu,
+    setSelectedPriceRange,
+    setSearchItem,
+  } = props;
 
   // if (
   //   selectedCategory.length +
@@ -29,9 +35,12 @@ export function FilterBar(props) {
   //   return null;
 
   const onClearAll = () => {
-    setselectedCategory([]);
+    setSelectedCategories([]);
     setSelectedPriceRange({ min: "", max: "", isApplied: false });
+    setSelectedBrand("");
     setSelectedRating("");
+    setSelectedMenu("");
+    setSearchItem("");
   };
 
   //const [clearAll, setClearAll] = useState("");

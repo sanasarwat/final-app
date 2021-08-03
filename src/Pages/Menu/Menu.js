@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Menu(props) {
   let history = useHistory();
   const { setSelectedMenu } = useContext(FilterContext);
-  const { category } = props;
+  // const { category } = props;
   const { title, icon } = props.category;
 
   //console.log(category);
@@ -60,7 +60,7 @@ export default function Menu(props) {
             </Link> */}
             <Link to="/collection" onClick={() => setSelectedMenu(title)}>
               <Typography
-                onClick={() => setSelectedMenu(category.title)}
+                onClick={() => setSelectedMenu(title)}
                 className={classes.Link}
                 variant="subtitle2"
               >

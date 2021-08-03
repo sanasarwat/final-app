@@ -1,12 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useMemo } from "react";
 import { ProductListing } from "./ProductListing";
 import { FilterBar } from "./FilterBar";
-import { priceRange } from "../../data/products";
-
+import SortFilter from "./SortFilter";
 import { CategoryFilter } from "./CategoryFilter";
 import { getVisibleProducts } from "../../api/products-api";
-import { getVisibleProductsByMenu } from "../../api/products-api";
-import { BrandFilter } from "./BrandFilter";
+import BrandFilter from "./BrandFilter";
 import { ChipFilter } from "./ChipFilter";
 import { SearchBar } from "./SearchFilter";
 import PriceFilter from "./PriceFilter";
@@ -21,7 +19,6 @@ import { Container, Grid, Typography } from "@material-ui/core/";
 import Footer from "../../Components/Footer/Footer";
 import BreadCrums from "../../Components/Breadcrums/Breadcrums";
 import BottomHeader from "../../Components/Header/BottomHeader";
-import { UseQuery } from "../../Hooks";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
@@ -37,61 +34,46 @@ export default function Collections() {
   //let cName = query.get("category") || "";
 
   const {
-    selectedBrand,
-    selectedCategory,
-    setselectedCategory,
-    onChangeBrandHandler,
-    onChangeCheckedHandler,
+    selectedCategories,
+    setSelectedCategories,
+    searchItem,
+    setSearchItem,
     selectedRating,
     setSelectedRating,
+    sortBy,
+    setSortBy,
+    selectedBrand,
+    setSelectedBrand,
     selectedMenu,
-    searchHandler,
-    selectedSearchItem,
+    setSelectedMenu,
+    selectedPriceRange,
+    setSelectedPriceRange,
   } = useContext(FilterContext);
   // console.log(selectedMenu);
 
-  const [selectedPriceRange, setSelectedPriceRange] = useState({
-    min: priceRange.min,
-    max: priceRange.max,
-    isApplied: false,
-  });
-
-  const initPriceFilter = () => ({
-    min: priceRange.min,
-    max: priceRange.max,
-    isApplied: false,
-  });
-
-  //price handler
-
-  const onChangePriceHandler = (newPriceRange) => {
-    if (newPriceRange === "clear")
-      return setSelectedPriceRange(initPriceFilter());
-
-    if (
-      newPriceRange[0] === priceRange.min &&
-      newPriceRange[1] === priceRange.max
-    )
-      return setSelectedPriceRange(initPriceFilter());
-
-    setSelectedPriceRange({
-      min: newPriceRange[0],
-      max: newPriceRange[1],
-      isApplied: true,
-    });
-  };
-
   //products get
 
-  const products = !selectedMenu
-    ? getVisibleProducts(
-        selectedCategory,
+  const { products } = useMemo(
+    () =>
+      getVisibleProducts({
+        selectedCategories,
+        searchItem,
         selectedRating,
-        selectedPriceRange,
+        sortBy,
         selectedBrand,
-        selectedSearchItem
-      )
-    : getVisibleProductsByMenu(selectedMenu);
+        selectedMenu,
+        selectedPriceRange,
+      }),
+    [
+      selectedCategories,
+      searchItem,
+      selectedRating,
+      sortBy,
+      selectedBrand,
+      selectedMenu,
+      selectedPriceRange,
+    ]
+  );
 
   return (
     <>
@@ -102,33 +84,35 @@ export default function Collections() {
         <Grid container>
           <Grid item md={3} lg={3} sm={12} xs={12} p={2}>
             <FilterBar
-              selectedCategory={selectedCategory}
-              setselectedCategory={setselectedCategory}
+              selectedCategories={selectedCategories}
+              setSelectedCategories={setSelectedCategories}
               selectedPriceRange={selectedPriceRange}
               setSelectedPriceRange={setSelectedPriceRange}
+              selectedBrand={selectedBrand}
+              setSelectedBrand={setSelectedBrand}
               selectedRating={selectedRating}
               setSelectedRating={setSelectedRating}
+              setSelectedMenu={setSelectedMenu}
+              searchItem={searchItem}
+              setSearchItem={setSearchItem}
             />
             <SearchBar
-              searchHandler={searchHandler}
-              selectedSearchItem={selectedSearchItem}
+              setSearchItem={setSearchItem}
               placeholder="Search Products"
             />
 
             <CategoryFilter
-              selectedCategory={selectedCategory}
-              onChangeCategory={onChangeCheckedHandler}
+              selectedCategories={selectedCategories}
+              setSelectedCategories={setSelectedCategories}
             />
             <BrandFilter
               selectedBrand={selectedBrand}
-              onChangeBrand={onChangeBrandHandler}
+              setSelectedBrand={setSelectedBrand}
             />
 
             <PriceFilter
               selectedPriceRange={selectedPriceRange}
-              onChangePrice={onChangePriceHandler}
-              min={priceRange.min}
-              max={priceRange.max}
+              setSelectedPriceRange={setSelectedPriceRange}
             />
             <ReviewFilter
               selectedRating={selectedRating}
@@ -137,20 +121,27 @@ export default function Collections() {
           </Grid>
 
           <Grid item md={9} lg={9} sm={12} xs={12}>
-            <Grid item>
-              <Grid item md={12}>
+            <Grid container>
+              <Grid item md={9}>
                 <ItemFoundText total={products.length} string="Search String" />
               </Grid>
+              <Grid item md={3}>
+                <SortFilter sortBy={sortBy} setSortBy={setSortBy} />
+              </Grid>
             </Grid>
-            <Grid item md={12}>
-              <ChipFilter
-                selectedCategory={selectedCategory}
-                setselectedCategory={setselectedCategory}
-                selectedPriceRange={selectedPriceRange}
-                setSelectedPriceRange={setSelectedPriceRange}
-                selectedRating={selectedRating}
-                setSelectedRating={setSelectedRating}
-              />
+            <Grid container>
+              <Grid item md={12}>
+                <ChipFilter
+                  selectedCategories={selectedCategories}
+                  setSelectedCategories={setSelectedCategories}
+                  selectedPriceRange={selectedPriceRange}
+                  setSelectedPriceRange={setSelectedPriceRange}
+                  selectedRating={selectedRating}
+                  setSelectedRating={setSelectedRating}
+                  selectedBrand={selectedBrand}
+                  setSelectedBrand={setSelectedBrand}
+                />
+              </Grid>
             </Grid>
 
             <Grid item md={12}>
